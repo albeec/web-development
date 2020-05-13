@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block head_title %} Contact {% endblock %}
+
+{% block content%}
+
+<form action="." method="post">
+    {% csrf_token %}
+    <!--<input type="text" id="lname" name="lname">
+    <input type="email" id="email" name="email">-->
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

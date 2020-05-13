@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block head_title %} Blog.Delete {% endblock %}
+
+{% block content %}
+	<h1>Are you sure you want to delete</h1>
+	{{ form.title }}	
+
+	<form method="POST"> {% csrf_token %}
+		<button class="btn btn-danger">Yes</button>
+		<button class="btn btn-danger">No</button>
+	</form>
+{% endblock %}

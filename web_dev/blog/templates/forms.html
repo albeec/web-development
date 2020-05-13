@@ -1,0 +1,15 @@
+
+<form method='POST' path='./'>
+	{% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+   	 	<label class="form-check-label">{{field.name}}</label>
+    	{{field}}
+	</div>
+    {% endfor %}
+    <div {{isShow}}>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+

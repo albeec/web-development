@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head_title %} Blog.Detail {% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+	
+
+	{% include "forms.html" %} 
+{% if request.user.is_authenticated %}
+	<a href="{{ object.get_edit_url }}" class="btn btn-info" role="button">Update</a>
+	<a href="{{ object.get_delete_url }}" class="btn btn-info" role="button">Delete</a>
+{% endif %}
+</div>
+{% endblock %}
