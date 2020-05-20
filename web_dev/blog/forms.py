@@ -6,7 +6,8 @@ class BlogPostForm(forms.Form):
     slug = forms.SlugField()
     content = forms.CharField(widget=forms.Textarea)
 
+
 class BlogPostModelForm(forms.ModelForm):
 	class Meta:
 		model = BlogPost
-		fields = ['title', 'slug', 'content']
+		fields = ['title', 'slug', 'content', 'publish_date']

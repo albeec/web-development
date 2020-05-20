@@ -6,7 +6,7 @@
 	
 	<div class="list-group">
 		{% for object in objects %}
-			<a href="{{ object.get_absolute_url }}" class="list-group-item list-group-item-action">{{ object.title }}</a>
+			{% include 'list_inline.html' with blog_post=object truncate=True detail=False %}
 		{% endfor %}
 	</div>
 	

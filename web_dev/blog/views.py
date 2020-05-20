@@ -5,6 +5,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost
 from .forms import BlogPostModelForm
 
+
+
+
 def blog_post_detail(request, slug):
 	obj = get_object_or_404(BlogPost, slug=slug)
 	form = BlogPostModelForm(request.POST or None, instance=obj)
@@ -19,7 +22,10 @@ def blog_post_detail(request, slug):
 
 def blog_post_list(request):
 	#obj = get_object_or_404(BlogPost, slug=slug)
-	qs = BlogPost.objects.all()
+	qs = BlogPost.objects.all().published()
+	if request.user.is_authenticated:
+		my_qs = BlogPost.objects.filter(user=request.user)
+		qs = ( qs | my_qs ).distinct()
 	template_name = 'blog_post_list.html'
 	context = {"objects": qs}
 	return render(request, template_name, context)
@@ -38,13 +44,6 @@ def blog_post_create(request):
 		"form": form,
 		"isShow": "shown"
 	}
-	return render(request, template_name, context)
-
-
-def blog_post_retrieve(request):
-	obj = get_object_or_404(BlogPost, slug=slug)
-	template_name = 'blog_post_detail.html'
-	context = {"object": obj}
 	return render(request, template_name, context)
 
 
