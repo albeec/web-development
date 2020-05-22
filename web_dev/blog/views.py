@@ -31,9 +31,11 @@ def blog_post_list(request):
 	return render(request, template_name, context)
 	
 
-@login_required(login_url="/admin")
+
 def blog_post_create(request):
-	form = BlogPostModelForm(request.POST or None)
+	form = BlogPostModelForm(request.POST or None, request.FILES or None)
+	print(form.is_valid())
+	print(form.errors)
 	if form.is_valid():
 		obj = form.save(commit=False)
 		obj.user = request.user
@@ -48,8 +50,6 @@ def blog_post_create(request):
 
 
 def blog_post_update(request, slug):
-	print("update")
-	print(request.POST)
 	obj = get_object_or_404(BlogPost, slug=slug)
 	form = BlogPostModelForm(request.POST or None, instance=obj)
 	if form.is_valid():
